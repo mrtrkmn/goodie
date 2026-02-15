@@ -193,7 +193,7 @@ async function handleAddToGoodreadsWidget(isbn) {
 function updateBadge(tabId, count) {
   if (count > 0) {
     chrome.action.setBadgeText({ text: count.toString(), tabId });
-    chrome.action.setBadgeBackgroundColor({ color: '#4CAF50', tabId });
+    chrome.action.setBadgeBackgroundColor({ color: '#409D69', tabId });
   } else {
     chrome.action.setBadgeText({ text: '', tabId });
   }
