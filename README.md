@@ -253,6 +253,6 @@ If you encounter any issues or have questions:
 
 ---
 
-**Made with ❤️ for book lovers**
+**Made with ❤️ for my wifey.
 
 Version: 1.0.0
