@@ -21,6 +21,8 @@ goodie/
 ├── README.md                        # This file
 ├── LICENSE                          # License file
 ├── .gitignore                       # Git ignore rules
+├── tampermonkey/
+│   └── goodie.user.js               # Tampermonkey userscript (standalone)
 ├── icons/                           # Extension icons
 │   ├── icon16.png
 │   ├── icon32.png
@@ -52,6 +54,17 @@ goodie/
 ```
 
 ## Installation
+
+### Tampermonkey Userscript
+
+If you prefer not to install a Chrome extension, you can use the Tampermonkey userscript instead. It provides the same core functionality (ISBN detection, book metadata, Goodreads integration) in a floating panel.
+
+1. Install [Tampermonkey](https://www.tampermonkey.net/) in your browser
+2. Open [`tampermonkey/goodie.user.js`](tampermonkey/goodie.user.js) and click **Raw** (or copy its contents)
+3. Tampermonkey will prompt you to install the script — click **Install**
+4. Visit any page with ISBN numbers and the Goodie panel will appear
+
+The panel is draggable, collapsible, and can be closed. Click **Scan Page** to re-scan at any time.
 
 ### From Source (Developer Mode)
 
