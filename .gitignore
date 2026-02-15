@@ -1,1 +1,12 @@
-#placeholder
+node_modules/
+.DS_Store
+*.log
+.env
+*.tmp
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+dist/
+build/
