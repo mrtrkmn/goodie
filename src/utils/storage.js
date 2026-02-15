@@ -77,18 +77,14 @@ export async function getAllSettings() {
       STORAGE_KEYS.AUTO_SCAN,
       STORAGE_KEYS.DEFAULT_SHELF,
       STORAGE_KEYS.CONFIRM_BEFORE_ADD,
-      STORAGE_KEYS.GOOGLE_BOOKS_API_KEY,
-      STORAGE_KEYS.GOODREADS_API_KEY,
-      STORAGE_KEYS.GOODREADS_API_SECRET
+      STORAGE_KEYS.GOOGLE_BOOKS_API_KEY
     ]);
     
     return {
       autoScan: result[STORAGE_KEYS.AUTO_SCAN] ?? DEFAULTS.AUTO_SCAN,
       defaultShelf: result[STORAGE_KEYS.DEFAULT_SHELF] ?? DEFAULTS.DEFAULT_SHELF,
       confirmBeforeAdd: result[STORAGE_KEYS.CONFIRM_BEFORE_ADD] ?? DEFAULTS.CONFIRM_BEFORE_ADD,
-      googleBooksApiKey: result[STORAGE_KEYS.GOOGLE_BOOKS_API_KEY] ?? '',
-      goodreadsApiKey: result[STORAGE_KEYS.GOODREADS_API_KEY] ?? '',
-      goodreadsApiSecret: result[STORAGE_KEYS.GOODREADS_API_SECRET] ?? ''
+      googleBooksApiKey: result[STORAGE_KEYS.GOOGLE_BOOKS_API_KEY] ?? ''
     };
   } catch (error) {
     console.error('Error getting all settings:', error);
@@ -96,9 +92,7 @@ export async function getAllSettings() {
       autoScan: DEFAULTS.AUTO_SCAN,
       defaultShelf: DEFAULTS.DEFAULT_SHELF,
       confirmBeforeAdd: DEFAULTS.CONFIRM_BEFORE_ADD,
-      googleBooksApiKey: '',
-      goodreadsApiKey: '',
-      goodreadsApiSecret: ''
+      googleBooksApiKey: ''
     };
   }
 }

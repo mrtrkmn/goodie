@@ -6,10 +6,10 @@ A production-ready Chrome Extension that automatically detects ISBN numbers on a
 
 - **🔍 Automatic ISBN Detection**: Scans web pages for ISBN-10 and ISBN-13 numbers using regex patterns with checksum validation
 - **📖 Book Metadata Fetching**: Retrieves book information from Google Books API with Open Library as fallback
-- **🔗 Goodreads Integration**: Search books on Goodreads directly, with legacy API support for existing key holders
+- **🔗 Goodreads Integration**: Add books to Goodreads shelves directly, or search books on Goodreads
 - **⚡ Real-time Scanning**: Uses MutationObserver to detect ISBNs in dynamically loaded content
 - **💾 Smart Caching**: Caches book metadata for 24 hours to minimize API calls
-- **⚙️ Customizable Settings**: Configure auto-scan, API keys, and preferences
+- **⚙️ Customizable Settings**: Configure auto-scan and preferences
 - **🎨 Clean UI**: Modern, responsive popup interface with book cards
 - **🔐 Security-First**: All API calls from background service worker, no inline scripts
 
@@ -96,7 +96,6 @@ Click "⚙️ Settings" in the popup to configure:
 - **Confirm before adding**: Ask for confirmation before adding books to Goodreads (default: enabled)
 - **Default shelf**: Choose default Goodreads shelf (default: "to-read")
 - **Google Books API Key**: Optional API key for higher rate limits
-- **Goodreads API credentials**: Legacy support for existing API key holders
 
 ### API Keys Setup
 
@@ -110,16 +109,11 @@ Click "⚙️ Settings" in the popup to configure:
 
 **Note**: Google Books API works without a key (with lower rate limits of ~1000 requests/day).
 
-#### Goodreads API (Legacy)
+### Goodreads Integration
 
-⚠️ **Important**: The Goodreads API was officially deprecated in December 2020. New API keys are no longer available.
-
-If you have an existing Goodreads API key:
-1. Enter your API Key in the Goodreads API Key field
-2. Enter your API Secret in the Goodreads API Secret field
-3. Save settings
-
-For users without API keys, use the "Search on Goodreads" button to open books on Goodreads.com.
+Goodie integrates with Goodreads by opening the Goodreads book page directly using the detected ISBN.
+No API key is required — simply click "Add to Goodreads" on any detected book to open its Goodreads page,
+where you can add it to your shelves. You can also use "Search on Goodreads" to search by ISBN.
 
 ## How It Works
 
@@ -197,7 +191,7 @@ sum mod 10 = 0
 
 ## Known Limitations
 
-1. **Goodreads API Deprecation**: The Goodreads API was deprecated in December 2020. New users cannot get API keys. The extension provides a "Search on Goodreads" button as a fallback.
+1. **Goodreads Integration**: Adding books to Goodreads shelves requires users to be logged in to Goodreads in their browser. The extension opens the Goodreads book page where the user can add the book to a shelf.
 
 2. **Rate Limits**:
    - Google Books: ~1000 requests/day (free tier)
