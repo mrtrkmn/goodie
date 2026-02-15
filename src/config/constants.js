@@ -8,8 +8,7 @@ export const API_ENDPOINTS = {
   OPEN_LIBRARY_BOOKS: 'https://openlibrary.org/api/books',
   OPEN_LIBRARY_ISBN: 'https://openlibrary.org/isbn',
   GOODREADS_SEARCH: 'https://www.goodreads.com/search',
-  GOODREADS_BOOK_ISBN: 'https://www.goodreads.com/book/isbn',
-  GOODREADS_ADD_TO_BOOKS_WIDGET: 'https://www.goodreads.com/book/add_to_books_widget'
+  GOODREADS_BOOK_ISBN: 'https://www.goodreads.com/book/isbn'
 };
 
 export const STORAGE_KEYS = {

@@ -134,7 +134,12 @@ function createBookCard(book) {
   const addBtn = document.createElement('button');
   addBtn.className = 'btn btn-primary btn-small';
   addBtn.textContent = '📖 Add to Goodreads';
-  addBtn.onclick = () => handleAddToGoodreads(book.isbn);
+  if (book.isbn) {
+    addBtn.onclick = () => handleAddToGoodreads(book.isbn);
+  } else {
+    addBtn.disabled = true;
+    addBtn.title = 'ISBN not available';
+  }
   actions.appendChild(addBtn);
   
   // Search on Goodreads button
