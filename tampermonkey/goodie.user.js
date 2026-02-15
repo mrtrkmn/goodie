@@ -34,6 +34,7 @@
 
   const DEBOUNCE_DELAY_MS = 500;
   const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+  const MIN_TEXT_LENGTH = 10; // minimum text length to trigger a rescan
 
   // ── ISBN Utilities ─────────────────────────────────────────────────────
 
@@ -578,7 +579,7 @@
     let html = '';
     for (const [isbn, book] of bookData) {
       const thumbHTML = book.thumbnail
-        ? '<img class="goodie-book-thumb" src="' + escapeAttr(book.thumbnail) + '" alt="' + escapeAttr(book.title) + '" onerror="this.outerHTML=\'<div class=goodie-book-thumb-placeholder>\u{1F4DA}</div>\'">'
+        ? '<img class="goodie-book-thumb" src="' + escapeAttr(book.thumbnail) + '" alt="' + escapeAttr(book.title) + '">'
         : '<div class="goodie-book-thumb-placeholder">\u{1F4DA}</div>';
 
       const authorsText =
@@ -629,6 +630,16 @@
         }, 2000);
       });
     });
+
+    // Attach image error handlers for thumbnail fallback
+    body.querySelectorAll('.goodie-book-thumb').forEach((img) => {
+      img.addEventListener('error', function () {
+        const placeholder = document.createElement('div');
+        placeholder.className = 'goodie-book-thumb-placeholder';
+        placeholder.textContent = '\u{1F4DA}';
+        this.replaceWith(placeholder);
+      });
+    });
   }
 
   // ── Helpers ────────────────────────────────────────────────────────────
@@ -659,7 +670,7 @@
             if (
               node.nodeType === Node.ELEMENT_NODE &&
               !node.closest('#goodie-panel') &&
-              (node.textContent || '').length > 10
+              (node.textContent || '').length > MIN_TEXT_LENGTH
             ) {
               shouldScan = true;
               break;
