@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goodie - ISBN Detector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <h1 class="title">📚 Goodie</h1>
+        <p class="subtitle">ISBN Book Manager</p>
+      </div>
+    </header>
+
+    <!-- Status/Feedback Area -->
+    <div id="status" class="status hidden"></div>
+
+    <!-- Detected Books Section -->
+    <div id="books-section" class="books-section">
+      <div class="section-header">
+        <h2>Detected Books</h2>
+        <button id="scan-btn" class="btn btn-secondary" title="Scan current page">
+          🔍 Scan Page
+        </button>
+      </div>
+      
+      <div id="books-list" class="books-list">
+        <!-- Books will be inserted here -->
+      </div>
+      
+      <div id="empty-state" class="empty-state">
+        <p>📖 No ISBNs detected on this page.</p>
+        <p class="empty-hint">Visit a book-related website or click "Scan Page" to search manually.</p>
+      </div>
+      
+      <div id="loading-state" class="loading-state hidden">
+        <p>⏳ Loading books...</p>
+      </div>
+    </div>
+
+    <!-- Settings Section -->
+    <div class="settings-section">
+      <button id="settings-toggle" class="settings-toggle">
+        ⚙️ Settings
+        <span class="toggle-icon">▼</span>
+      </button>
+      
+      <div id="settings-content" class="settings-content hidden">
+        <div class="setting-group">
+          <label class="setting-label">
+            <input type="checkbox" id="auto-scan" class="setting-checkbox">
+            <span>Auto-scan pages for ISBNs</span>
+          </label>
+        </div>
+        
+        <div class="setting-group">
+          <label class="setting-label">
+            <input type="checkbox" id="confirm-before-add" class="setting-checkbox">
+            <span>Confirm before adding to Goodreads</span>
+          </label>
+        </div>
+        
+        <div class="setting-group">
+          <label for="default-shelf" class="setting-label-text">Default Goodreads shelf:</label>
+          <select id="default-shelf" class="setting-select">
+            <option value="to-read">To Read</option>
+            <option value="currently-reading">Currently Reading</option>
+            <option value="read">Read</option>
+          </select>
+        </div>
+        
+        <div class="setting-group">
+          <label for="google-api-key" class="setting-label-text">Google Books API Key (optional):</label>
+          <input type="text" id="google-api-key" class="setting-input" placeholder="Enter API key">
+          <p class="setting-hint">Get your API key from <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></p>
+        </div>
+        
+        <div class="setting-group">
+          <label for="goodreads-api-key" class="setting-label-text">Goodreads API Key (legacy):</label>
+          <input type="text" id="goodreads-api-key" class="setting-input" placeholder="Enter API key">
+          <p class="setting-hint">⚠️ Goodreads API was deprecated in Dec 2020. New keys are not available.</p>
+        </div>
+        
+        <div class="setting-group">
+          <label for="goodreads-api-secret" class="setting-label-text">Goodreads API Secret (legacy):</label>
+          <input type="password" id="goodreads-api-secret" class="setting-input" placeholder="Enter API secret">
+        </div>
+        
+        <button id="save-settings" class="btn btn-primary">Save Settings</button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Goodie v1.0.0</p>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
