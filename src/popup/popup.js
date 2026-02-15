@@ -29,8 +29,6 @@ async function init() {
     confirmBeforeAdd: document.getElementById('confirm-before-add'),
     defaultShelf: document.getElementById('default-shelf'),
     googleApiKey: document.getElementById('google-api-key'),
-    goodreadsApiKey: document.getElementById('goodreads-api-key'),
-    goodreadsApiSecret: document.getElementById('goodreads-api-secret'),
     saveSettings: document.getElementById('save-settings')
   };
   
@@ -132,6 +130,18 @@ function createBookCard(book) {
   const actions = document.createElement('div');
   actions.className = 'book-actions';
   
+  // Add to Goodreads button (opens book page on Goodreads by ISBN)
+  const addBtn = document.createElement('button');
+  addBtn.className = 'btn btn-primary btn-small';
+  addBtn.textContent = '📖 Add to Goodreads';
+  if (book.isbn) {
+    addBtn.onclick = () => handleAddToGoodreads(book.isbn);
+  } else {
+    addBtn.disabled = true;
+    addBtn.title = 'ISBN not available';
+  }
+  actions.appendChild(addBtn);
+  
   // Search on Goodreads button
   const searchBtn = document.createElement('button');
   searchBtn.className = 'btn btn-secondary btn-small';
@@ -197,6 +207,21 @@ async function handleSearchGoodreads(isbn) {
 }
 
 /**
+ * Handles adding a book to Goodreads via direct ISBN lookup
+ * Opens the Goodreads book page by ISBN so the user can add it to a shelf
+ * @param {string} isbn - The ISBN of the book
+ */
+async function handleAddToGoodreads(isbn) {
+  try {
+    await sendMessage(MESSAGE_TYPES.ADD_TO_GOODREADS_WIDGET, { isbn });
+    showStatus('Opened Goodreads book page in new tab', 'success');
+  } catch (error) {
+    console.error('Error opening Goodreads:', error);
+    showStatus('Error opening Goodreads book page', 'error');
+  }
+}
+
+/**
  * Handles copy ISBN to clipboard
  * @param {string} isbn - The ISBN to copy
  * @param {HTMLElement} button - The button element
@@ -246,8 +271,6 @@ async function loadSettings() {
     elements.confirmBeforeAdd.checked = settings.confirmBeforeAdd;
     elements.defaultShelf.value = settings.defaultShelf;
     elements.googleApiKey.value = settings.googleBooksApiKey;
-    elements.goodreadsApiKey.value = settings.goodreadsApiKey;
-    elements.goodreadsApiSecret.value = settings.goodreadsApiSecret;
   } catch (error) {
     console.error('Error loading settings:', error);
   }
@@ -265,8 +288,6 @@ async function saveSettings() {
     await setSyncStorage(STORAGE_KEYS.CONFIRM_BEFORE_ADD, elements.confirmBeforeAdd.checked);
     await setSyncStorage(STORAGE_KEYS.DEFAULT_SHELF, elements.defaultShelf.value);
     await setSyncStorage(STORAGE_KEYS.GOOGLE_BOOKS_API_KEY, elements.googleApiKey.value);
-    await setSyncStorage(STORAGE_KEYS.GOODREADS_API_KEY, elements.goodreadsApiKey.value);
-    await setSyncStorage(STORAGE_KEYS.GOODREADS_API_SECRET, elements.goodreadsApiSecret.value);
     
     showStatus('Settings saved successfully!', 'success');
     

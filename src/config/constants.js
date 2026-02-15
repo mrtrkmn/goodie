@@ -7,7 +7,8 @@ export const API_ENDPOINTS = {
   GOOGLE_BOOKS: 'https://www.googleapis.com/books/v1/volumes',
   OPEN_LIBRARY_BOOKS: 'https://openlibrary.org/api/books',
   OPEN_LIBRARY_ISBN: 'https://openlibrary.org/isbn',
-  GOODREADS_SEARCH: 'https://www.goodreads.com/search'
+  GOODREADS_SEARCH: 'https://www.goodreads.com/search',
+  GOODREADS_BOOK_ISBN: 'https://www.goodreads.com/book/isbn'
 };
 
 export const STORAGE_KEYS = {
@@ -15,8 +16,6 @@ export const STORAGE_KEYS = {
   DEFAULT_SHELF: 'defaultShelf',
   CONFIRM_BEFORE_ADD: 'confirmBeforeAdd',
   GOOGLE_BOOKS_API_KEY: 'googleBooksApiKey',
-  GOODREADS_API_KEY: 'goodreadsApiKey',
-  GOODREADS_API_SECRET: 'goodreadsApiSecret',
   DETECTED_BOOKS: 'detectedBooks',
   BOOK_METADATA_CACHE: 'bookMetadataCache'
 };
@@ -34,10 +33,10 @@ export const DEFAULTS = {
 export const MESSAGE_TYPES = {
   ISBNS_DETECTED: 'ISBNS_DETECTED',
   FETCH_BOOK_INFO: 'FETCH_BOOK_INFO',
-  ADD_TO_GOODREADS: 'ADD_TO_GOODREADS',
   SCAN_PAGE: 'SCAN_PAGE',
   GET_DETECTED_BOOKS: 'GET_DETECTED_BOOKS',
   SEARCH_GOODREADS: 'SEARCH_GOODREADS',
+  ADD_TO_GOODREADS_WIDGET: 'ADD_TO_GOODREADS_WIDGET',
   COPY_ISBN: 'COPY_ISBN'
 };
 

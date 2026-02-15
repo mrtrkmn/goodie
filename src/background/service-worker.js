@@ -39,8 +39,8 @@ function handleMessage(message, sender, sendResponse) {
       handleSearchGoodreads(data.isbn).then(sendResponse);
       return true; // Async response
       
-    case MESSAGE_TYPES.ADD_TO_GOODREADS:
-      handleAddToGoodreads(data.isbn, data.shelf).then(sendResponse);
+    case MESSAGE_TYPES.ADD_TO_GOODREADS_WIDGET:
+      handleAddToGoodreadsWidget(data.isbn).then(sendResponse);
       return true; // Async response
       
     case MESSAGE_TYPES.COPY_ISBN:
@@ -171,17 +171,16 @@ async function handleSearchGoodreads(isbn) {
 }
 
 /**
- * Adds a book to Goodreads shelf
+ * Opens the Goodreads book page for an ISBN so users can add it to their shelves
  * @param {string} isbn - The ISBN
- * @param {string} shelf - The shelf name
  * @returns {Promise<Object>} Result
  */
-async function handleAddToGoodreads(isbn, shelf) {
+async function handleAddToGoodreadsWidget(isbn) {
   try {
-    const result = await goodreads.addToShelf(isbn, shelf);
-    return result;
+    await goodreads.openAddToGoodreadsWidget(isbn);
+    return { success: true };
   } catch (error) {
-    console.error('Error adding to Goodreads:', error);
+    console.error('Error opening Goodreads book page:', error);
     return { success: false, error: error.message };
   }
 }
@@ -194,7 +193,7 @@ async function handleAddToGoodreads(isbn, shelf) {
 function updateBadge(tabId, count) {
   if (count > 0) {
     chrome.action.setBadgeText({ text: count.toString(), tabId });
-    chrome.action.setBadgeBackgroundColor({ color: '#4CAF50', tabId });
+    chrome.action.setBadgeBackgroundColor({ color: '#409D69', tabId });
   } else {
     chrome.action.setBadgeText({ text: '', tabId });
   }
